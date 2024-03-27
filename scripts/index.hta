@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sin Perder El Tiempo</title>
+    <hta:application
+    id="MiApp"
+    applicationName="Nombre de tu aplicación"
+    border="thin"
+    caption="yes"
+    icon="scripts/img/logoOscuro.png"
+    maximizeButton="no"
+    minimizeButton="yes"
+    showInTaskbar="yes"
+    sysmenu="yes"
+    windowState="normal"
+    resizable="yes"
+    >
+    </hta:application>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE y Edge */
+            overflow: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 0px; /* Oculta la barra de desplazamiento en WebKit (Chrome, Safari, etc.) */
+        }
+        label {
+            display: inline-block;
+            font-size: 22px;
+            margin: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            background-color: #007bff;
+            color: white;
+            font-weight: bolder;
+            margin: 5px;
+            border-radius: 20px;
+            border: red 2px solid;
+            transition: 2s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transition: 2s;
+        }
+
+        .logo {
+            display: block;
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+        }
+
+        .info {
+            display: block;
+            width: 20px;
+            height: 20px;
+            margin: 5px;
+            border: 0px solid;
+        }
+
+        .infoCaja {
+            position: absolute;
+            background-color: red;
+            left: 5px;
+            bottom: 5px;
+            text-decoration: none;
+            border-radius: 20px;
+            border: 0px solid;
+        }
+    </style>
+    <script language="javascript">
+        window.resizeTo(600, 400);
+        window.resizable = "yes";
+    </script>
+</head>
+<body>
+    <img class="logo" src="img/logoOscuro.png">
+    <label>Archivos de ofimatica</label>
+    <br>
+    <!-- Botones para ejecutar los scripts -->
+    <input class="btn" type="button" value="DOCX" onclick="abrirArchivo('DOCX')" />
+    <input class="btn" type="button" value="TXT" onclick="abrirArchivo('TXT')" />
+    <input class="btn" type="button" value="PNG" onclick="abrirArchivo('PNG')" />
+    <input class="btn" type="button" value="JPG" onclick="abrirArchivo('JPG')" />
+    <br>
+    <label>Archivos Web</label>
+    <br>
+    <input class="btn" type="button" value="HTML" onclick="abrirArchivo('HTML')" />
+    <input class="btn" type="button" value="CSS" onclick="abrirArchivo('CSS')" />
+    <input class="btn" type="button" value="JS" onclick="abrirArchivo('JS')" />
+    <br>
+    <script language="javascript">
+        // Función para abrir enlace en el navegador predeterminado
+        function abrirEnlace(url) {
+            var shell = new ActiveXObject("WScript.Shell");
+            shell.run(url);
+        }
+    </script>
+    <a class="infoCaja" onclick="abrirEnlace('http://www.literalmentetodo.000.pe');">
+        <img class="info" src="img/info.png" alt="info">
+    </a>
+    <script language="VBScript">
+    Sub abrirArchivo(tipo)
+        Dim rutaArchivo
+        rutaArchivo = ""
+
+        Select Case tipo
+            Case "DOCX"
+                rutaArchivo = "SPET_DOCX.vbs"
+            Case "TXT"
+                rutaArchivo = "SPET_TXT.vbs"
+            Case "PNG"
+                rutaArchivo = "SPET_PNG.vbs"
+            Case "JPG"
+                rutaArchivo = "SPET_JPG.vbs"
+            Case "HTML"
+                rutaArchivo = "SPET_HTML.vbs"
+            Case "CSS"
+                rutaArchivo = "SPET_CSS.vbs"
+            Case "JS"
+                rutaArchivo = "SPET_JS.vbs"
+            Case Else
+                MsgBox "Tipo de archivo no soportado"
+                Exit Sub
+        End Select
+
+        ' Crear el objeto Shell
+        Set WshShell = CreateObject("WScript.Shell")
+
+        Dim fso, scriptDir, unidad
+        Set fso = CreateObject("Scripting.FileSystemObject")
+        ' Solo para HTA
+        scriptDir = fso.GetParentFolderName(document.location.pathname)
+
+        ' Obtener la unidad del disco
+        unidad = Left(scriptDir, 2)
+
+        Dim rutaAux
+        rutaAux = "file:\\\" & unidad & "\scripts\herramientas\" & rutaArchivo
+
+        'MsgBox rutaAux
+
+        ' Ejecutar el archivo
+        WshShell.Run Chr(34) & rutaAux & Chr(34), 1, False
+
+    End Sub
+    </script>
+</body>
+</html>

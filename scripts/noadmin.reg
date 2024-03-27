@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+; Permitir ejecutar archivos .bat sin confirmación
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Associations]
+"LowRiskFileTypes"=".bat"
+
+; Permitir ejecutar archivos .vbs sin confirmación
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Associations]
+"LowRiskFileTypes"=".vbs"
+
+; Permitir ejecutar archivos .hta sin confirmación
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Associations]
+"LowRiskFileTypes"=".hta"
